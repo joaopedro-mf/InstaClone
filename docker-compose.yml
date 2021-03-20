@@ -1,0 +1,38 @@
+version: '3.4'
+networks:
+  instaclone:
+    driver: bridge
+
+services:
+  instaclone.webapi:
+    image: ${DOCKER_REGISTRY-}instaclonewebapi
+    depends_on:
+       - "postgres_image"
+    build:
+      context: .
+      dockerfile: InstaClone.WebAPI/Dockerfile
+    ports:
+       - "8000:80"
+    environment:
+       DB_CONNECTION_STRING : "host=postgres_image;port=5432;database=insta_database;username=insta_user;password=bloguser"
+    networks:
+     - instaclone
+    #extra_hosts:
+    #- "localhost:127.0.0.1"
+    
+  postgres_image:
+    image: postgres
+    restart: always
+    ports:
+       - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down 
+    environment:
+        - POSTGRES_USER=insta_user
+        - POSTGRES_PASSWORD=insta_password
+        - POSTGRES_DB=insta_database
+    networks:
+     - instaclone 
+
+volumes:
+  database-data: # named volumes can be managed easier using docker-compose

@@ -1,0 +1,43 @@
+networks:
+  instaclone:
+    driver: bridge
+services:
+  instaclone.webapi:
+    build:
+      context: C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone
+      dockerfile: InstaClone.WebAPI/Dockerfile
+    depends_on:
+      postgres_image:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DB_CONNECTION_STRING: host=postgres_image;port=5432;database=insta_database;username=insta_user;password=bloguser
+    image: instaclonewebapi
+    networks:
+      instaclone: {}
+    ports:
+    - published: 8000
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\jpepe\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\jpepe\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  postgres_image:
+    environment:
+      POSTGRES_DB: insta_database
+      POSTGRES_PASSWORD: insta_password
+      POSTGRES_USER: insta_user
+    image: postgres
+    networks:
+      instaclone: {}
+    ports:
+    - published: 5432
+      target: 5432
+    restart: always
+    volumes:
+    - database-data:/var/lib/postgresql/data/:rw
+version: '3.4'
+volumes:
+  database-data: {}

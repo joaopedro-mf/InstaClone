@@ -1,0 +1,9 @@
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\bin\Debug\netstandard2.0\InstaClone.Domain.deps.json
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\bin\Debug\netstandard2.0\InstaClone.Domain.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\bin\Debug\netstandard2.0\InstaClone.Domain.pdb
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\obj\Debug\netstandard2.0\InstaClone.Domain.csprojAssemblyReference.cache
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\obj\Debug\netstandard2.0\InstaClone.Domain.AssemblyInfoInputs.cache
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\obj\Debug\netstandard2.0\InstaClone.Domain.AssemblyInfo.cs
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\obj\Debug\netstandard2.0\InstaClone.Domain.csproj.CoreCompileInputs.cache
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\obj\Debug\netstandard2.0\InstaClone.Domain.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Domain\obj\Debug\netstandard2.0\InstaClone.Domain.pdb

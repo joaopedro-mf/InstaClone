@@ -1,0 +1,12 @@
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\bin\Debug\netcoreapp3.1\InstaClone.Application.deps.json
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\bin\Debug\netcoreapp3.1\InstaClone.Application.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\bin\Debug\netcoreapp3.1\InstaClone.Application.pdb
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\bin\Debug\netcoreapp3.1\InstaClone.Domain.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\bin\Debug\netcoreapp3.1\InstaClone.Domain.pdb
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.csprojAssemblyReference.cache
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.AssemblyInfoInputs.cache
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.AssemblyInfo.cs
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.csproj.CoreCompileInputs.cache
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.csproj.CopyComplete
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.Application\obj\Debug\netcoreapp3.1\InstaClone.Application.pdb
