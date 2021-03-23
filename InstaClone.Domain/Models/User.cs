@@ -11,7 +11,7 @@ namespace InstaClone.Domain.Models
 {
     public class User : Notification
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public string NickName { get; set; }
         public string Email { get; set; }
         public User()  { }

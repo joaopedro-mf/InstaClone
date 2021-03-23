@@ -24,7 +24,7 @@ namespace InstaClone.WebApi.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult> Register(CreateUserViewModel user) =>
+        public async Task<ActionResult> Register(UserInfoViewModel user) =>
             CustomResponse(await _userService.RegisterNewUser(user));
 
         [HttpPost]
@@ -32,18 +32,27 @@ namespace InstaClone.WebApi.Controllers
         public async Task<ActionResult> Login(UserLoginViewModel user) =>
             CustomResponse(await _userService.Login(user));
 
-        [HttpPost]
+        [HttpPut]
         [Authorize]
-        [Route("update/{id}")]
-        public async Task<ActionResult> Update(int id,UserViewModel user) =>
-            CustomResponse(await _userService.UpdateUser(id,user));
+        public async Task<ActionResult> Update(UserInfoViewModel user) =>
+            CustomResponse(await _userService.UpdateUser( GetJwtIdentifier() , user));
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult> GetInfo(int id) =>
+            CustomResponse(await _userService.GetUserInfo(id));
 
         [HttpGet]
         [Authorize]
-        [Route("teste")]
-        public string teste() =>
-           //"teste";
-           User.Identity.Name;
+        [Route("{id}/full")]
+        public async Task<ActionResult> GetFullInfo() =>
+        CustomResponse(await _userService.GetUserFullInfo( GetJwtIdentifier() ));
+
+        [HttpPost]
+        [Authorize]
+        [Route("{id}/follow")]
+        public async Task<ActionResult> Follow(int id) =>
+        CustomResponse(await _userService.FollowUser(id, GetJwtIdentifier()));
 
     }
 }

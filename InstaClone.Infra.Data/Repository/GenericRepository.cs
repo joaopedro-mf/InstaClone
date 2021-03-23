@@ -37,16 +37,16 @@ namespace InstaClone.Infra.Data.Repository
         //    _dbContext.SaveChanges();
         //}
 
-        protected virtual void Delete(int id)
+        protected virtual async Task Delete(int id)
         {
-            _dbContext.Set<TEntity>().Remove(Select(id));
-            _dbContext.SaveChanges();
+            _dbContext.Set<TEntity>().Remove(await Select(id));
+            await _dbContext.SaveChangesAsync();
         }
 
         protected virtual IList<TEntity> Select() =>
             _dbContext.Set<TEntity>().ToList();
 
-        protected virtual TEntity Select(int id) =>
-            _dbContext.Set<TEntity>().Find(id);
+        protected virtual async Task<TEntity> Select(int id) =>
+            await _dbContext.Set<TEntity>().FindAsync(id);
     }
 }

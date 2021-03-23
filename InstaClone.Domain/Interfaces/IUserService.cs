@@ -10,9 +10,11 @@ namespace InstaClone.Domain.Interfaces
 {
     public interface IUserService
     {
-        Task<IResponse> RegisterNewUser(CreateUserViewModel user);
+        Task<IResponse> RegisterNewUser(UserInfoViewModel user);
         Task<IResponse> Login(UserLoginViewModel user);
-        Task<IResponse> UpdateUser(int id,UserViewModel user);
+        Task<IResponse> UpdateUser(int id, UserInfoViewModel user);
         Task<IResponse> GetUserInfo(int id);
+        Task<IResponse> GetUserFullInfo(int id);
+        Task<IResponse> FollowUser(int followId, int userId);
     }
 }

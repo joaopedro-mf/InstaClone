@@ -9,16 +9,15 @@ namespace InstaClone.Domain.Models
 {
     public class Post : Publication
     {
+        public Post() { }
         public Photo PostImage { get; set; }
-
         public Location Local { get; set; }
-
         public List<Comment> Comments { get; set; }
-
-        //TODO
-        public override bool Validate()
+        public override void Validate()
         {
-            throw new NotImplementedException();
+            AddErrors(PostImage.Errors);
+
+            AddErrors(Local.Errors);
         }
     }
 }

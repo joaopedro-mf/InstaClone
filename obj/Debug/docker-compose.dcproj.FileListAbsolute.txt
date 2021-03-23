@@ -42,3 +42,6 @@ C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Swashbuckle.AspNetCo
 C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Microsoft.OpenApi.dll
 C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\bin\Debug\Newtonsoft.Json.Bson.dll

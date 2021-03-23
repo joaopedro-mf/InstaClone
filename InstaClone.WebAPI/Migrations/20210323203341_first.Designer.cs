@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InstaClone.WebAPI.Migrations
 {
     [DbContext(typeof(InstaContext))]
-    [Migration("20210318225559_first-Migration")]
-    partial class firstMigration
+    [Migration("20210323203341_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,9 @@ namespace InstaClone.WebAPI.Migrations
             modelBuilder.Entity("InstaClone.Domain.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("Date");
@@ -32,10 +34,15 @@ namespace InstaClone.WebAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<int>("PostId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -45,7 +52,9 @@ namespace InstaClone.WebAPI.Migrations
             modelBuilder.Entity("InstaClone.Domain.Models.Post", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("Date");
@@ -56,16 +65,21 @@ namespace InstaClone.WebAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("InstaClone.Domain.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -78,31 +92,31 @@ namespace InstaClone.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("UserUser", b =>
                 {
-                    b.Property<int>("FollowersUserId")
+                    b.Property<int>("FollowersId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("FollowingUserId")
+                    b.Property<int>("FollowingId")
                         .HasColumnType("integer");
 
-                    b.HasKey("FollowersUserId", "FollowingUserId");
+                    b.HasKey("FollowersId", "FollowingId");
 
-                    b.HasIndex("FollowingUserId");
+                    b.HasIndex("FollowingId");
 
                     b.ToTable("UserUser");
                 });
 
             modelBuilder.Entity("InstaClone.Domain.Models.Comment", b =>
                 {
-                    b.HasOne("InstaClone.Domain.Models.Post", "PostCommentary")
+                    b.HasOne("InstaClone.Domain.Models.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -112,29 +126,29 @@ namespace InstaClone.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PostCommentary");
+                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("InstaClone.Domain.Models.Post", b =>
                 {
-                    b.HasOne("InstaClone.Domain.Models.User", null)
-                        .WithMany("MyPosts")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("InstaClone.Domain.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("InstaClone.Domain.Models.User", null)
+                        .WithMany("MyPosts")
+                        .HasForeignKey("UserId1");
+
                     b.OwnsOne("InstaClone.Domain.ValueObjects.Location", "Local", b1 =>
                         {
                             b1.Property<int>("PostId")
-                                .HasColumnType("integer");
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                             b1.Property<string>("City")
                                 .HasColumnType("text");
@@ -159,7 +173,9 @@ namespace InstaClone.WebAPI.Migrations
                     b.OwnsOne("InstaClone.Domain.ValueObjects.Photo", "PostImage", b1 =>
                         {
                             b1.Property<int>("PostId")
-                                .HasColumnType("integer");
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                             b1.Property<string>("LocalStorage")
                                 .HasColumnType("text");
@@ -226,13 +242,13 @@ namespace InstaClone.WebAPI.Migrations
                 {
                     b.HasOne("InstaClone.Domain.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("FollowersUserId")
+                        .HasForeignKey("FollowersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("InstaClone.Domain.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("FollowingUserId")
+                        .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -26,6 +26,14 @@ namespace InstaClone.Domain.ValueObjects
             else LocalStorage = "";
         }
 
+        public Photo(string base64Photo, int idUser)
+        {
+
+            if (base64Photo != "")
+                SavePhoto(base64Photo, idUser+'-'+new Random().Next().ToString());
+            else LocalStorage = "";
+        }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return LocalStorage;

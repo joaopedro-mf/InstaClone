@@ -22,6 +22,16 @@ namespace InstaClone.Infra.Data.Mapping
             builder.Property(prop => prop.Description)
                 .HasColumnType("varchar(255)");
 
+            builder
+            .HasOne(prop => prop.User)
+            .WithMany(prop => prop.MyCommments)
+            .HasForeignKey(prop => prop.UserId);
+
+            builder
+            .HasOne(prop => prop.Post)
+            .WithMany(prop => prop.Comments)
+            .HasForeignKey(prop => prop.PostId);
+
         }
     }
 

@@ -14,7 +14,7 @@ namespace InstaClone.Infra.Data.Mapping
         public void Configure(EntityTypeBuilder<User> builder)
         {
 
-            builder.HasKey(prop => prop.UserId);
+            builder.HasKey(prop => prop.Id);
 
             builder.Property(prop => prop.NickName)
                 .IsRequired()
@@ -27,11 +27,11 @@ namespace InstaClone.Infra.Data.Mapping
             builder.OwnsOne(prop => prop.Password) ;
 
             builder.OwnsOne(prop => prop.UserPhoto);
-        
-            builder
-                .HasMany(prop => prop.MyPosts)
-                .WithOne()
-                .HasForeignKey(x => x.Id);
+
+            //builder
+            //    .HasMany(prop => prop.MyPosts)
+            //    .WithOne()
+            //    .HasForeignKey(x => x.Id);
 
             builder
                 .HasMany(prop => prop.Followers)

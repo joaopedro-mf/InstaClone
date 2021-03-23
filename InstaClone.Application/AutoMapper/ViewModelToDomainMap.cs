@@ -17,14 +17,18 @@ namespace InstaClone.Application.AutoMapper
         {
             //TODO
             // Criar camada de Validação
-            CreateMap<CreateUserViewModel, User>()
+            CreateMap<UserInfoViewModel, User>()
                 .ForMember(dest => dest.Password, m => m.MapFrom(a => new Password(a.Password)))
-                .ForMember(dest => dest.UserPhoto, m => m.MapFrom(a => new Photo(a.Photo_b64, a.NickName)));
-            CreateMap<UserViewModel, User>();
+                .ForMember(dest => dest.UserPhoto, m => m.MapFrom(a => new Photo(a.Photo, a.NickName)));
+            CreateMap<UserPageViewModel, User>();
             //.ConstructUsing(c => new RegisterNewCustomerCommand(c.Name, c.Email, c.BirthDate));
-            CreateMap<PostViewModel, Post>();
-            //  .ConstructUsing(c => new UpdateCustomerCommand(c.Id, c.Name, c.Email, c.BirthDate));
-            CreateMap<CommentViewModel, Comment>();
+            CreateMap<PostCardViewModel, Post>();
+            CreateMap<CreatePostViewModel, Post>()
+                .ForMember(dest => dest.PostImage, m => m.MapFrom(a => new Photo(a.Photo, a.UserId)))
+                .ForMember(dest => dest.Local, m => m.MapFrom(a => new Location(a.Location)))
+                .ForMember(dest => dest.Description, m => m.MapFrom(a => a.Descritpion));
+            CreateMap<CreateCommentViewModel, Comment>()
+                .ForMember(dest => dest.Description, m => m.MapFrom(a => a.CommentText));
         } 
     }
 }

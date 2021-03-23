@@ -21,5 +21,18 @@ namespace InstaClone.WebAPI.Controllers
             }
             return Ok(result.GetResponse());
         }
+
+        protected int GetJwtIdentifier()
+        {
+            try
+            {
+                return Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Contains("nameidentifier")).Value);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
     }
 }

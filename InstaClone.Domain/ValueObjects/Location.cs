@@ -26,6 +26,22 @@ namespace InstaClone.Domain.ValueObjects
             Country = country;
         }
 
+        public Location(string FullLocation)
+        {
+            string[] subs = FullLocation.Split(',');
+
+            Validate(subs);
+
+            
+            Name = IfNullReturnDefault(subs[0]);
+            if (subs.Length >= 2)
+                City = IfNullReturnDefault(subs[1]);
+            if (subs.Length >= 3)
+                State = IfNullReturnDefault(subs[2]);
+            if (subs.Length >= 4)
+                Country = IfNullReturnDefault(subs[3]);
+        }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Name;
@@ -34,5 +50,26 @@ namespace InstaClone.Domain.ValueObjects
             yield return Country;
 
         }
+
+        private void Validate(string[] value)
+        {
+            if (value.Length > 2)
+            {
+                //state
+                if (value[2].Length > 2)
+                    AddError(new Error("Location", "Estado com formato invalido"));
+                // country
+                if (value[3].Length > 2)
+                    AddError(new Error("Location", "Pais formato invalido"));
+            }
+        }
+
+        public string GetValue()
+        {
+            return $"{Name}, {City},{State},{Country}";
+        }
+
+        private string IfNullReturnDefault(string value) =>
+               value == null ? "" : value;
     }
 }

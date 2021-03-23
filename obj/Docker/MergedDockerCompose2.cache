@@ -1,0 +1,63 @@
+networks:
+  instaclone:
+    driver: bridge
+services:
+  instaclone.webapi:
+    build:
+      context: C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone
+      dockerfile: InstaClone.WebAPI/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: InstaClone.WebAPI
+      target: base
+    container_name: InstaClone.WebAPI_1
+    depends_on:
+      postgres_image:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DB_CONNECTION_STRING: host=postgres_image;port=5432;database=insta_database;username=insta_user;password=bloguser
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: instaclonewebapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/InstaClone.WebAPI.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      instaclone: {}
+    ports:
+    - published: 8000
+      target: 80
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone\InstaClone.WebAPI:/app:rw
+    - C:\Users\jpepe\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\jpepe\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\jpepe\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\jpepe\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\jpepe\OneDrive\Documentos\Git\InstaClone:/src:rw
+  postgres_image:
+    environment:
+      POSTGRES_DB: insta_database
+      POSTGRES_PASSWORD: insta_password
+      POSTGRES_USER: insta_user
+    image: postgres
+    networks:
+      instaclone: {}
+    ports:
+    - published: 5432
+      target: 5432
+    restart: always
+    volumes:
+    - database-data:/var/lib/postgresql/data/:rw
+version: '3.4'
+volumes:
+  database-data: {}

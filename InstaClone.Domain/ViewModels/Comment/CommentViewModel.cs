@@ -9,6 +9,6 @@ namespace InstaClone.Domain.ViewModels.Comment
     {
         public int CommentId { get; set; }
         public string CommentText { get; set; }
-        public UserViewModel UserAuthor { get; set; }
+        public UserPageViewModel UserAuthor { get; set; }
     }
 }

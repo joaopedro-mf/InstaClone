@@ -26,11 +26,12 @@ namespace InstaClone.Infra.Data.Repository
                                 .FirstOrDefaultAsync(p=>p.NickName == nickname);
         }
 
+
         public Task Create(User newUser) =>
             base.Insert(newUser);
 
-        public User GetById(int id) => 
-            base.Select(id);
+        public async Task<User> GetById(int id) => 
+            await base.Select(id);
 
         public Task UpdateUser(User user) =>
             base.Update(user);

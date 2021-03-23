@@ -8,9 +8,10 @@ namespace InstaClone.Domain.Models
 {
     public class Comment : Publication
     {
-        public Post PostCommentary { get; set; }
+        public int PostId { get; set; }
+        public Post Post { get; set; }
         //TODO
-        public override bool Validate()
+        public override void Validate()
         {
             throw new NotImplementedException();
         }

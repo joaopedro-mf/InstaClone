@@ -16,8 +16,13 @@ namespace InstaClone.WebAPI.Configuration
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostService, PostService>();
+
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICommentService, CommentService>();
 
         }
 

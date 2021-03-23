@@ -14,19 +14,13 @@ namespace InstaClone.Infra.Data.Mapping
             builder.HasKey(prop => prop.Id);
 
             builder.Property(prop => prop.CreationDate)
-                .IsRequired()
                 .HasColumnType("Date");
 
             builder.Property(prop => prop.Description)
                 .HasColumnType("varchar(255)");
 
             builder
-                .HasMany(prop => prop.Comments)
-                .WithOne(prop => prop.PostCommentary)
-                .HasForeignKey(prop => prop.Id);
-
-            builder
-                .HasOne(prop => prop.User)
+                .HasOne<User>(prop => prop.User)
                 .WithMany()
                 .HasForeignKey(prop => prop.UserId);
 
